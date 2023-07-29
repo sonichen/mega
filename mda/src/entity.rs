@@ -41,6 +41,10 @@ pub struct Config {
     /// Maximum number of threads  
     #[arg(long, default_value = "10")]
     pub threads: Option<usize>,   
+
+    /// Maximum number of threads  
+    #[arg(long, default_value = "-1")]
+    pub rev: Option<i32>,   
 }
 
 /// Define Index, Index is used to record data offset
@@ -92,6 +96,18 @@ impl fmt::Display for TrainData {
         write!(f, " {{  metadata: {} }}",  self.metadata)
     }
 }
+
+
+
+#[derive(Serialize, Deserialize, Debug)]
+pub struct MDAIndex {
+    pub header_offset: u64,
+    pub train_data_offset: u64,
+
+    pub anno_entries_offset: u64,
+    pub anno_headers_offset: u64,
+}
+
 
 /// Type of training data
 #[derive(Serialize, Deserialize, Debug)]
